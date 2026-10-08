@@ -1,0 +1,40 @@
+{
+  "pairs": 131625,
+  "queries": 2657,
+  "historical_positive_queries": 448,
+  "retrieved_positive_queries": 427,
+  "descriptor_recall_at_50": 0.953125,
+  "state_counts": {
+    "reject": 116186,
+    "uncertain": 12399,
+    "accept": 3040
+  },
+  "state_by_label": {
+    "ignore": {
+      "accept": 221,
+      "reject": 6311,
+      "uncertain": 7928
+    },
+    "negative": {
+      "accept": 0,
+      "reject": 109679,
+      "uncertain": 1997
+    },
+    "positive": {
+      "accept": 2819,
+      "reject": 196,
+      "uncertain": 2474
+    }
+  },
+  "accept_pair_precision": 1.0,
+  "accept_pair_recall_conditional_top50": 0.5135725997449444,
+  "accept_query_recall_conditional_top50": 0.8407494145199064,
+  "accept_query_recall_end_to_end": 0.8013392857142857,
+  "reranked_recall_at_1_end_to_end": 0.8928571428571429,
+  "false_positives_per_query": 0.0,
+  "uncertain_positive_pairs": 2474,
+  "uncertain_negative_pairs": 1997,
+  "reject_positive_pairs": 196,
+  "reject_negative_pairs": 109679,
+  "note": "All model, calibration, geometry, and three-way parameters are frozen from sequence 00/02 before this sequence-05 evaluation."
+}

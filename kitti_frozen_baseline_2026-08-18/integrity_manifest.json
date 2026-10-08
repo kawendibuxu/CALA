@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "freeze_id": "kitti-frozen-baseline-2026-08-18",
+  "created_at_utc": "2026-08-19T01:08:50.352587+00:00",
+  "project_root": "/data1/jiaming/UniPR-3D-main",
+  "hash_algorithm": "SHA-256",
+  "git": {
+    "head": "9c3a2eb5876025e7a3b1536307e2fe7b4692aa0d",
+    "branch": "main",
+    "working_tree_clean": false,
+    "status_at_freeze": [
+      " M PROJECT_HANDOFF.md",
+      " M summarize_kitti_frozen_three_way.py",
+      "?? \"UniPR_3D_VGGT_\\345\\244\\232\\345\\270\\247\\345\\256\\211\\345\\205\\250\\345\\233\\236\\347\\216\\257\\346\\243\\200\\346\\265\\213\\345\\256\\236\\351\\252\\214\\350\\256\\260\\345\\275\\225.md\""
+    ],
+    "note": "The current source snapshot includes uncommitted documentation/summarizer changes; source_files hashes are authoritative for this freeze."
+  },
+  "artifact_files": [
+    {
+      "path": "model/multi_model.ckpt",
+      "size_bytes": 3703481315,
+      "mtime_utc": "2026-07-27T04:25:43+00:00",
+      "sha256": "2b7d00a4227b8e17361694d5b6df56c6e6f553880c1d55a81d190e3c7b59f738"
+    },
+    {
+      "path": "model/VGGT-model/model.pt",
+      "size_bytes": 5026874952,
+      "mtime_utc": "2026-07-27T23:31:20+00:00",
+      "sha256": "d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0"
+    },
+    {
+      "path": "outputs/kitti_00_seq5_stride1_unipr_descriptors.pt",
+      "size_bytes": 312542188,
+      "mtime_utc": "2026-07-28T12:17:10.911466+00:00",
+      "sha256": "30f5c5a6282c4400ce5f13ff76af52710f3a40422b3ca0476a4269a8b4c42f78"
+    },
+    {
+      "path": "outputs/kitti_00_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+      "size_bytes": 13169409,
+      "mtime_utc": "2026-07-28T12:21:15.384185+00:00",
+      "sha256": "4942d209e1015d6720f347a8e00d123d147fd7308b5a7eb4129b59c6a5087dbf"
+    },
+    {
+      "path": "outputs/kitti_02_seq5_stride1_unipr_descriptors.pt",
+      "size_bytes": 320808620,
+      "mtime_utc": "2026-07-28T13:33:26.278015+00:00",
+      "sha256": "f3ba1425c6e745b23ffaf98feb59cb5050f221f3f64cf3259d433d1dec3f9489"
+    },
+    {
+      "path": "outputs/kitti_02_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+      "size_bytes": 13735632,
+      "mtime_utc": "2026-07-28T13:34:34.765030+00:00",
+      "sha256": "85ed4280b5b9d33c1b6253a9a003e0332797991bfc05fc3c51a36c0ec936fe25"
+    },
+    {
+      "path": "outputs/kitti_05_seq5_stride1_unipr_descriptors.pt",
+      "size_bytes": 189923308,
+      "mtime_utc": "2026-07-29T03:26:07.267216+00:00",
+      "sha256": "14f921a16a9d2b491a8407dfbc2ba6d80fde5c2223c876926fbadbb154295e31"
+    },
+    {
+      "path": "outputs/kitti_05_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+      "size_bytes": 7751412,
+      "mtime_utc": "2026-07-29T03:10:56.495551+00:00",
+      "sha256": "0b4e4e0307f846fe7488e7304fa2c7ae5ba3f97c26863779b447e6978d5d446e"
+    },
+    {
+      "path": "outputs/kitti_06_seq5_stride1_unipr_descriptors.pt",
+      "size_bytes": 75570924,
+      "mtime_utc": "2026-08-14T02:30:31.840322+00:00",
+      "sha256": "98822efa5d214b55e4cbcf5d7af9d9c63ada59dcbe7a9c8be40336cc9b8af8d5"
+    },
+    {
+      "path": "outputs/kitti_06_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+      "size_bytes": 2729145,
+      "mtime_utc": "2026-08-14T02:34:27.789082+00:00",
+      "sha256": "18338ceda1a498543f9c6c7c3207e68cfa192ca1332087d60130cfb5acfbe624"
+    },
+    {
+      "path": "outputs/kitti_00_top50_cross_token_3d_pos100_neg500.csv",
+      "size_bytes": 122435,
+      "mtime_utc": "2026-07-29T06:55:37.874168+00:00",
+      "sha256": "6d3eef4ccc97e191cb46e5f2813af0f5d98c0fd2e2dc5a4ab4bc8ffad972f613"
+    },
+    {
+      "path": "outputs/kitti_02_top50_cross_token_3d_pos100_neg500.csv",
+      "size_bytes": 122720,
+      "mtime_utc": "2026-07-29T07:10:58.334094+00:00",
+      "sha256": "dc0ee616ae00b5fa0c8fe66556600b210b9fc3de5dcfcc6b60e958dd7610c0c4"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_decision_head_00_to_02/decision_head.pt",
+      "size_bytes": 2492,
+      "mtime_utc": "2026-07-29T07:12:08.361287+00:00",
+      "sha256": "7c114e898f83c185653d501eee3a32807ac44b5cd9031cbc788632bad31f30e7"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_decision_head_00_to_02/report.json",
+      "size_bytes": 2089,
+      "mtime_utc": "2026-07-29T07:12:08.365287+00:00",
+      "sha256": "940087ab64221b432bedd573939610b68914a7bb5331f7f5efc06ab34bac5e07"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_decision_head_00_to_02/val_predictions.csv",
+      "size_bytes": 131759,
+      "mtime_utc": "2026-07-29T07:12:08.365287+00:00",
+      "sha256": "a65bf8a9a6ee192ee42f46cb8164cfa464f4af0596b97f4eb75f8f7c8857f052"
+    },
+    {
+      "path": "outputs/kitti_02_top50_cross_token_3d_rank_stratified_calibration.csv",
+      "size_bytes": 315643,
+      "mtime_utc": "2026-07-29T08:16:41.775511+00:00",
+      "sha256": "7a61a2d04bc238ab16e4843c713e63f36df839e4f54f2a4f2954587a1ffab2dd"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_three_way_calibration_02/frozen_three_way_decision.pt",
+      "size_bytes": 3268,
+      "mtime_utc": "2026-07-30T06:34:23.493855+00:00",
+      "sha256": "3c974f4eb657450c96387bdfdb283901d6e95ca13acbc30ca5780af9533d2779"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_three_way_calibration_02/report.json",
+      "size_bytes": 1626,
+      "mtime_utc": "2026-07-30T06:34:23.493855+00:00",
+      "sha256": "feeafcd18f7df39ec90fb5195d8f52c4c9309aec51791baded15065fca44afec"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_three_way_calibration_02/calibration_predictions.csv",
+      "size_bytes": 380791,
+      "mtime_utc": "2026-07-30T06:34:23.509854+00:00",
+      "sha256": "a8b44afb8fd43622e61a816780cd5ae507432182286612a03f836b8c7104ab4a"
+    },
+    {
+      "path": "outputs/kitti_05_frozen_three_way_eval/report.json",
+      "size_bytes": 1119,
+      "mtime_utc": "2026-08-01T13:49:56.967374+00:00",
+      "sha256": "93b1c5bf6bfc06ce68f570a69afcf29bcd42869b651e2fee2718f9a6003700d8"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_full_decision_head_00/decision_head.pt",
+      "size_bytes": 2428,
+      "mtime_utc": "2026-08-06T01:24:59.923951+00:00",
+      "sha256": "87f0dd6a0fa4198478f2bda1560c20c26b2284514079cdc816149f2c0afb93a2"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_full_decision_head_00/report.json",
+      "size_bytes": 2265,
+      "mtime_utc": "2026-08-06T01:25:00.155946+00:00",
+      "sha256": "b2691080774a9c94df091b21b809d5d1308970a3c8adb0d73d1cab2af0b15365"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_full_three_way_calibration_02/frozen_three_way_decision.pt",
+      "size_bytes": 3204,
+      "mtime_utc": "2026-08-11T02:00:21.940539+00:00",
+      "sha256": "14db2d7f37de45cdf1e31ca550ce436c06dc9c8563308d3c98680628db3d4a08"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_full_three_way_calibration_02/report.json",
+      "size_bytes": 1619,
+      "mtime_utc": "2026-08-11T02:00:21.940539+00:00",
+      "sha256": "070b2d76c6fe6c260150d79c930a7d38fb9c3c78ee2e2bf85345870d33de70ef"
+    },
+    {
+      "path": "outputs/kitti_cross_token_3d_full_three_way_calibration_02/calibration_predictions.csv",
+      "size_bytes": 56947887,
+      "mtime_utc": "2026-08-11T02:00:23.860504+00:00",
+      "sha256": "13d6143f514234710d5e175d02b29985b6fe707cde89cb88076c65d1c5aea7b8"
+    },
+    {
+      "path": "outputs/kitti_05_full_three_way_eval/report.json",
+      "size_bytes": 1128,
+      "mtime_utc": "2026-08-14T02:08:58.118062+00:00",
+      "sha256": "306ce238c3f821747170a4b903004355fb8d741a56e36fad540f7d3eabe2f8db"
+    },
+    {
+      "path": "outputs/kitti_06_full_three_way_eval/report.json",
+      "size_bytes": 1292,
+      "mtime_utc": "2026-08-18T14:06:23.973331+00:00",
+      "sha256": "da5fd63942c3e83b8a2910551ea65adfc2eca0c84bdd19993514acd5684bdf20"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "run_multiframe_sample.py",
+      "size_bytes": 4714,
+      "mtime_utc": "2026-07-27T10:00:54.452244+00:00",
+      "sha256": "dff494ca7edc6eac878116ce325131bee1159e1d9cab2c1dbd99ceb52eb2c16a"
+    },
+    {
+      "path": "extract_kitti_descriptors.py",
+      "size_bytes": 4446,
+      "mtime_utc": "2026-07-28T11:56:20.668517+00:00",
+      "sha256": "3289d017ff71932ff74e8d006691f71b2a370acef934d736ec95779e2caa48b5"
+    },
+    {
+      "path": "build_kitti_topk_pairs.py",
+      "size_bytes": 5747,
+      "mtime_utc": "2026-07-28T12:20:31.196785+00:00",
+      "sha256": "bdd4f5a45b0786e0ba1c86329a2ef6b5555a906ecf0b54d21477532e463773ce"
+    },
+    {
+      "path": "extract_kitti_cross_token_3d_full.py",
+      "size_bytes": 4129,
+      "mtime_utc": "2026-08-01T13:58:18.472058+00:00",
+      "sha256": "5d0ddc4592252ecb5b35b1db452be3cc428586a5085dbf7c5767b6a3afd30e21"
+    },
+    {
+      "path": "train_kitti_decision_head.py",
+      "size_bytes": 14108,
+      "mtime_utc": "2026-07-28T14:20:09.291474+00:00",
+      "sha256": "ce324d3c01731aa99a2a5bf0750d0718823047aa5afe9e9f262c55e2c0030c91"
+    },
+    {
+      "path": "train_kitti_full_decision_head.py",
+      "size_bytes": 8591,
+      "mtime_utc": "2026-08-01T13:58:43.755693+00:00",
+      "sha256": "f53952c5192c34ac2442fcb74820696a1ca18c017535bbf836e2a2faf01b1d2f"
+    },
+    {
+      "path": "calibrate_kitti_three_way_decision.py",
+      "size_bytes": 9711,
+      "mtime_utc": "2026-08-01T14:01:41.997126+00:00",
+      "sha256": "3bc609dcc6493e760c8100bcb24e7eb028bd037ad0fdb02cd2cfb341301d28a6"
+    },
+    {
+      "path": "evaluate_kitti_frozen_three_way.py",
+      "size_bytes": 6240,
+      "mtime_utc": "2026-07-30T06:42:05.773189+00:00",
+      "sha256": "a79b2869eceebd00815113a6676536cd286ef746ac7f96465f384d0dc608190b"
+    },
+    {
+      "path": "summarize_kitti_frozen_three_way.py",
+      "size_bytes": 6272,
+      "mtime_utc": "2026-08-18T14:05:29.073986+00:00",
+      "sha256": "de718016b062c6066aad3d0141949bf2c16b166eea4978ea49cf25f10ffbc450"
+    },
+    {
+      "path": "kitti_loop/dataset.py",
+      "size_bytes": 5289,
+      "mtime_utc": "2026-07-28T10:08:34.346458+00:00",
+      "sha256": "076a8209ef715e5e3f30dc7b7a063fde0ec9131986c68d45d3167e074d3bba8a"
+    },
+    {
+      "path": "geometry_verification/image_io.py",
+      "size_bytes": 1286,
+      "mtime_utc": "2026-07-27T13:04:51.088670+00:00",
+      "sha256": "84df12255a1ff23ad9b43beec1add062cfe513cc6c046e56243c9cefc4390723"
+    },
+    {
+      "path": "geometry_verification/vggt_verifier.py",
+      "size_bytes": 6365,
+      "mtime_utc": "2026-07-29T06:20:07.491694+00:00",
+      "sha256": "e838ae74af6c510c979535a8885dde70d476049149ca3a5caa8ad0956c2ca680"
+    },
+    {
+      "path": "geometry_verification/cross_token_3d.py",
+      "size_bytes": 10442,
+      "mtime_utc": "2026-07-29T06:19:06.354083+00:00",
+      "sha256": "613a7e826d139278c4ca0e2b5ea83ba0863297b018756b7621be80df8b56bbc9"
+    }
+  ],
+  "chunk_collections": [
+    {
+      "path": "outputs/kitti_00_top50_cross_token_3d_full/chunks",
+      "file_pattern": "chunk_*.csv",
+      "file_count": 2207,
+      "data_rows": 220625,
+      "total_bytes": 47471246,
+      "first_file": "chunk_00000.csv",
+      "last_file": "chunk_02206.csv",
+      "aggregate_algorithm": "sha256(sorted(relative_path\\0size_bytes\\0file_sha256\\n))",
+      "aggregate_sha256": "8b9b5473925ed4a3661007465ae20c2a9d00dfa9b1530a050001905093064998"
+    },
+    {
+      "path": "outputs/kitti_02_top50_cross_token_3d_full/chunks",
+      "file_pattern": "chunk_*.csv",
+      "file_count": 2267,
+      "data_rows": 226625,
+      "total_bytes": 48971683,
+      "first_file": "chunk_00000.csv",
+      "last_file": "chunk_02266.csv",
+      "aggregate_algorithm": "sha256(sorted(relative_path\\0size_bytes\\0file_sha256\\n))",
+      "aggregate_sha256": "f0a68b8d11c7ac9ecfed29a136bb2d81385cd1956deb4f1d4bccc0e8dec9b681"
+    },
+    {
+      "path": "outputs/kitti_05_frozen_three_way_eval/chunks",
+      "file_pattern": "chunk_*.csv",
+      "file_count": 1317,
+      "data_rows": 131625,
+      "total_bytes": 32070442,
+      "first_file": "chunk_00000.csv",
+      "last_file": "chunk_01316.csv",
+      "aggregate_algorithm": "sha256(sorted(relative_path\\0size_bytes\\0file_sha256\\n))",
+      "aggregate_sha256": "1e814baab239356c72d100db9233aaf8910c02c8670374455af8982fe4165c5c"
+    },
+    {
+      "path": "outputs/kitti_05_full_three_way_eval/chunks",
+      "file_pattern": "chunk_*.csv",
+      "file_count": 1317,
+      "data_rows": 131625,
+      "total_bytes": 32077285,
+      "first_file": "chunk_00000.csv",
+      "last_file": "chunk_01316.csv",
+      "aggregate_algorithm": "sha256(sorted(relative_path\\0size_bytes\\0file_sha256\\n))",
+      "aggregate_sha256": "bf046487371584f1d68437ad2dbf60aa6e25673af3129ca6bc46aeeab972021a"
+    },
+    {
+      "path": "outputs/kitti_06_full_three_way_eval/chunks",
+      "file_pattern": "chunk_*.csv",
+      "file_count": 487,
+      "data_rows": 48625,
+      "total_bytes": 11703038,
+      "first_file": "chunk_00000.csv",
+      "last_file": "chunk_00486.csv",
+      "aggregate_algorithm": "sha256(sorted(relative_path\\0size_bytes\\0file_sha256\\n))",
+      "aggregate_sha256": "7d259acc1c10ebbc81ea94ee926154b78bd90b02f19028eedc970f4d8a001604"
+    }
+  ]
+}

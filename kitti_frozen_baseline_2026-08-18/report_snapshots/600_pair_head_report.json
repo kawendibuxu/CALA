@@ -1,0 +1,66 @@
+{
+  "train_csv": "/data1/jiaming/UniPR-3D-main/outputs/kitti_00_top50_cross_token_3d_pos100_neg500.csv",
+  "val_csv": "/data1/jiaming/UniPR-3D-main/outputs/kitti_02_top50_cross_token_3d_pos100_neg500.csv",
+  "train_rows": 600,
+  "val_rows": 600,
+  "train_class_counts": {
+    "positive": 100,
+    "negative": 500
+  },
+  "val_class_counts": {
+    "positive": 100,
+    "negative": 500
+  },
+  "features": [
+    "descriptor_similarity",
+    "weighted_3d_inlier_ratio",
+    "median_3d_residual",
+    "p90_3d_residual",
+    "mean_track_confidence",
+    "mean_visibility",
+    "temporal_consistency"
+  ],
+  "head": "logistic",
+  "epochs_completed": 300,
+  "weighted_bce_pos_weight": 5.0,
+  "threshold_target_reached": true,
+  "train_pair_metrics": {
+    "roc_auc": 0.99904,
+    "average_precision": 0.9949130473900591,
+    "threshold": 0.5953301787376404,
+    "tp": 99,
+    "fp": 3,
+    "fn": 1,
+    "tn": 497,
+    "precision": 0.9705882352941176,
+    "recall": 0.99,
+    "f1": 0.9801980198019802
+  },
+  "val_pair_metrics": {
+    "roc_auc": 1.0,
+    "average_precision": 1.0,
+    "threshold": 0.5953301787376404,
+    "tp": 100,
+    "fp": 1,
+    "fn": 0,
+    "tn": 499,
+    "precision": 0.9900990099009901,
+    "recall": 1.0,
+    "f1": 0.9950248756218906,
+    "sampled_query_metrics": {
+      "scope": "sampled_pairs_only_not_full_top_k",
+      "num_queries": 555,
+      "positive_queries": 85,
+      "selected_pairs": 101,
+      "query_recall_at_threshold": 1.0,
+      "observed_reranked_recall_at_1": 1.0,
+      "false_positives_per_query": 0.0018018018018018018
+    }
+  },
+  "limitations": [
+    "Validation contains a sampled 100 positive / 500 negative subset, not every top-K candidate.",
+    "Observed reranked Recall@1 and false positives per query are sampled-pair metrics, not full end-to-end metrics.",
+    "Descriptor Recall@K must be read from build_kitti_topk_pairs.py output; a decision head cannot recover positives absent from top-K.",
+    "The threshold is selected on this validation sequence. A third, unseen sequence is required for an unbiased thresholded test result."
+  ]
+}

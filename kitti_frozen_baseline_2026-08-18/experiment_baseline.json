@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "freeze_id": "kitti-frozen-baseline-2026-08-18",
+  "status": "frozen",
+  "protocol": {
+    "train_sequence": "00",
+    "calibration_sequence": "02",
+    "independent_test_sequences": [
+      "05",
+      "06"
+    ],
+    "test_reuse_policy": "Do not tune the sequence-00 head, sequence-02 Platt parameters, thresholds, or gates using sequence 05/06.",
+    "input": {
+      "source": "KITTI odometry image_2 RGB",
+      "frames": 5,
+      "frame_order": [
+        "t",
+        "t-2",
+        "t-1",
+        "t+1",
+        "t+2"
+      ],
+      "height": 392,
+      "width": 518
+    },
+    "retrieval": {
+      "descriptor_dimension": 17152,
+      "similarity": "cosine over L2-normalized descriptors",
+      "top_k": 50,
+      "minimum_temporal_gap": 100
+    },
+    "labels": {
+      "distance_axes": [
+        0,
+        2
+      ],
+      "positive_max_m": 5.0,
+      "negative_min_m": 25.0,
+      "between_thresholds": "ignore"
+    },
+    "decision_features": [
+      "descriptor_similarity",
+      "weighted_3d_inlier_ratio",
+      "median_3d_residual",
+      "p90_3d_residual",
+      "mean_track_confidence",
+      "mean_visibility",
+      "temporal_consistency"
+    ],
+    "formal_head": {
+      "type": "logistic",
+      "epochs": 50,
+      "positive_per_batch": 16,
+      "negative_per_batch": 48,
+      "train_positive_rows": 11985,
+      "negative_pool_rows": 47865
+    },
+    "platt": {
+      "coefficient": 0.5642800416793863,
+      "intercept": -4.512386596854704,
+      "formal_full_population_weights": 1.0
+    },
+    "three_way_rules": {
+      "accept_probability": 0.9470927362616622,
+      "reject_probability": 0.05,
+      "track_confidence_accept_min": 0.10930951356887818,
+      "visibility_accept_min": 0.1663115668296814,
+      "median_3d_residual_accept_max": 0.34197994112968433,
+      "track_confidence_reject_max": 0.3135078063607182,
+      "visibility_reject_max": 0.16327825635671586
+    }
+  },
+  "dataset_scale": {
+    "00": {
+      "descriptor_shape": [
+        4537,
+        17152
+      ],
+      "retrieval_queries": 4437,
+      "pairs": 220625,
+      "positive": 11985,
+      "negative": 183100,
+      "ignore": 25540
+    },
+    "02": {
+      "descriptor_shape": [
+        4657,
+        17152
+      ],
+      "retrieval_queries": 4557,
+      "pairs": 226625,
+      "positive": 2488,
+      "negative": 215203,
+      "ignore": 8934
+    },
+    "05": {
+      "descriptor_shape": [
+        2757,
+        17152
+      ],
+      "retrieval_queries": 2657,
+      "pairs": 131625,
+      "positive": 5489,
+      "negative": 111676,
+      "ignore": 14460
+    },
+    "06": {
+      "descriptor_shape": [
+        1097,
+        17152
+      ],
+      "retrieval_queries": 997,
+      "pairs": 48625,
+      "positive": 2629,
+      "negative": 36028,
+      "ignore": 9968
+    }
+  },
+  "results": {
+    "early_600_pair_model_on_05": {
+      "role": "feasibility baseline, not the formal model",
+      "accept_pair_precision": 1.0,
+      "accepted_negative": 0,
+      "accepted_ignore": 1228,
+      "accept_query_recall_end_to_end": 0.8392857142857143,
+      "reranked_recall_at_1_end_to_end": 0.890625,
+      "false_positives_per_query": 0.0
+    },
+    "formal_train_00": {
+      "role": "training-pool fit check, not generalization",
+      "roc_auc": 0.9991186709630988,
+      "average_precision": 0.9979808236769145
+    },
+    "formal_calibration_02": {
+      "role": "calibration set, not an independent test",
+      "roc_auc": 0.9982079481060676,
+      "average_precision": 0.9552780061610961,
+      "brier": 0.0020805369702826546,
+      "accept_pair_precision": 0.9902912621359223,
+      "accepted_negative": 17,
+      "accepted_ignore": null,
+      "accepted_ignore_note": "Not comparable: ignore rows are forced to uncertain by the calibration trainable mask.",
+      "accept_pair_recall": 0.6969453376205788
+    },
+    "formal_test_05": {
+      "role": "first independent test",
+      "historical_positive_queries": 448,
+      "retrieved_positive_queries": 427,
+      "descriptor_recall_at_50": 0.953125,
+      "accept_pair_precision": 1.0,
+      "accepted_positive": 2819,
+      "accepted_negative": 0,
+      "accepted_ignore": 221,
+      "accept_pair_recall_conditional_top50": 0.5135725997449444,
+      "accept_query_recall_conditional_top50": 0.8407494145199064,
+      "accept_query_recall_end_to_end": 0.8013392857142857,
+      "reranked_recall_at_1_end_to_end": 0.8928571428571429,
+      "false_positives_per_query": 0.0
+    },
+    "formal_test_06": {
+      "role": "second independent test",
+      "historical_positive_queries": 266,
+      "retrieved_positive_queries": 266,
+      "descriptor_recall_at_50": 1.0,
+      "accept_pair_precision": 1.0,
+      "accepted_positive": 1837,
+      "accepted_negative": 0,
+      "accepted_ignore": 143,
+      "accept_pair_recall_conditional_top50": 0.698744769874477,
+      "accept_query_recall_conditional_top50": 0.9511278195488722,
+      "accept_query_recall_end_to_end": 0.9511278195488722,
+      "reranked_recall_at_1_end_to_end": 0.981203007518797,
+      "false_positives_per_query": 0.0
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "protocol_id": "kitti-08-frozen-accept-only-2026-08-27",
+  "locked_at_local_date": "2026-08-27",
+  "status": "locked_before_inference",
+  "sequence": {
+    "id": "08",
+    "role": "hard_case_viewpoint_test",
+    "dataset_root": "/data3/xiaoke/UniPR-3D-main-loop/data-kitti-08/dataset",
+    "dataset_root_note": "Sequence 08 is absent from /data1/jiaming/data-0102/dataset and /data1 is full. Official KITTI odometry image_2 RGB plus poses are stored here. This is an input-path change only.",
+    "source": "KITTI odometry image_2 RGB and official poses",
+    "image_count": 4071,
+    "image_range": ["000000.png", "004070.png"],
+    "image_indices_contiguous": true,
+    "pose_count": 4071,
+    "velodyne_used": false,
+    "input_hashes": {
+      "poses/08.txt": "cd7177170c7d7ba98cdbfe9417f97bd9586da5c70cbd5ccefa5db6bf88a5fe88",
+      "sequences/08/calib.txt": "4abedb688d60249c36353b9893570f993ebfdc5ef7938f52f3a7b9e1edbfffb1",
+      "sequences/08/times.txt": "65359db9033c8716d2150c90c6fabc6f93db640531d3370e3eb7056d82590e9f"
+    }
+  },
+  "variable_control": {
+    "reference_protocol": "kitti-09-frozen-accept-only-2026-08-23",
+    "reference_sequences": ["05", "06", "07", "09"],
+    "only_changed_variable": "KITTI sequence id and its corresponding RGB/pose input",
+    "method": "frozen accept-only single-window association",
+    "tuning_policy": "Do not alter any threshold, weight, gate, retrieval parameter, GT radius, or association rule after seeing sequence 08. Do not run ablations 1-5 on 08 in this run. Do not add yaw or visual-overlap into GT."
+  },
+  "input_windows": {
+    "frames": 5,
+    "frame_order": ["t", "t-2", "t-1", "t+1", "t+2"],
+    "sequence_length": 5,
+    "stride": 1,
+    "image_height": 392,
+    "image_width": 518,
+    "expected_descriptor_windows": 4067,
+    "expected_descriptor_dimension": 17152
+  },
+  "retrieval": {
+    "similarity": "cosine over L2-normalized descriptors",
+    "top_k": 50,
+    "minimum_temporal_gap": 100,
+    "expected_retrieval_queries": 3967,
+    "expected_pair_rows": 197125,
+    "note": "Early queries have fewer than 50 historical windows (gap>=100), so pair rows are 197125 not 3967*50."
+  },
+  "ground_truth": {
+    "distance_axes": [0, 2],
+    "positive_max_m": 5.0,
+    "negative_min_m": 25.0,
+    "between_thresholds": "ignore",
+    "yaw_or_visual_overlap_used": false
+  },
+  "frozen_artifacts": {
+    "unipr_checkpoint": {
+      "path": "/data1/jiaming/UniPR-3D-main/model/multi_model.ckpt",
+      "sha256": "2b7d00a4227b8e17361694d5b6df56c6e6f553880c1d55a81d190e3c7b59f738"
+    },
+    "vggt_checkpoint": {
+      "path": "/data1/jiaming/UniPR-3D-main/model/VGGT-model/model.pt",
+      "sha256": "d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0"
+    },
+    "decision": {
+      "path": "/data1/jiaming/UniPR-3D-main/outputs/kitti_cross_token_3d_full_three_way_calibration_02/frozen_three_way_decision.pt",
+      "sha256": "14db2d7f37de45cdf1e31ca550ce436c06dc9c8563308d3c98680628db3d4a08",
+      "trained_on": "00",
+      "calibrated_on": "02"
+    }
+  },
+  "geometry": {
+    "grid_rows": 12,
+    "grid_cols": 16,
+    "ransac_threshold_m": 0.5,
+    "ransac_iterations": 256,
+    "seed": 17,
+    "chunk_size": 100,
+    "expected_chunks": 1972
+  },
+  "three_way_rules": {
+    "accept_probability": 0.9470927362616622,
+    "reject_probability": 0.05,
+    "track_confidence_accept_min": 0.10930951356887818,
+    "visibility_accept_min": 0.1663115668296814,
+    "median_3d_residual_accept_max": 0.34197994112968433,
+    "track_confidence_reject_max": 0.3135078063607182,
+    "visibility_reject_max": 0.16327825635671586
+  },
+  "association": {
+    "one_output_per_query": true,
+    "eligible_state": "accept",
+    "temporal_cluster_gap": 5,
+    "no_accepted_candidate": "abstain",
+    "ignore_in_strict_precision": "incorrect association"
+  },
+  "outputs": {
+    "root": "/data3/xiaoke/UniPR-3D-main-loop",
+    "descriptors": "/data3/xiaoke/UniPR-3D-main-loop/outputs/kitti_08_seq5_stride1_unipr_descriptors.pt",
+    "pairs": "/data3/xiaoke/UniPR-3D-main-loop/outputs/kitti_08_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+    "three_way_directory": "/data3/xiaoke/UniPR-3D-main-loop/outputs/kitti_08_full_three_way_eval",
+    "association_directory": "/data3/xiaoke/UniPR-3D-main-loop/outputs/kitti_08_loop_association_eval"
+  }
+}

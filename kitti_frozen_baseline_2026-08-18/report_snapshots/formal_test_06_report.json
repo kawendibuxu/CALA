@@ -1,0 +1,45 @@
+{
+  "sequence_id": "06",
+  "inputs": {
+    "pairs": "outputs/kitti_06_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+    "evaluation_dir": "outputs/kitti_06_full_three_way_eval"
+  },
+  "pairs": 48625,
+  "queries": 997,
+  "historical_positive_queries": 266,
+  "retrieved_positive_queries": 266,
+  "descriptor_recall_at_50": 1.0,
+  "state_counts": {
+    "reject": 40555,
+    "uncertain": 6090,
+    "accept": 1980
+  },
+  "state_by_label": {
+    "ignore": {
+      "accept": 143,
+      "reject": 5467,
+      "uncertain": 4358
+    },
+    "negative": {
+      "accept": 0,
+      "reject": 35056,
+      "uncertain": 972
+    },
+    "positive": {
+      "accept": 1837,
+      "reject": 32,
+      "uncertain": 760
+    }
+  },
+  "accept_pair_precision": 1.0,
+  "accept_pair_recall_conditional_top50": 0.698744769874477,
+  "accept_query_recall_conditional_top50": 0.9511278195488722,
+  "accept_query_recall_end_to_end": 0.9511278195488722,
+  "reranked_recall_at_1_end_to_end": 0.981203007518797,
+  "false_positives_per_query": 0.0,
+  "uncertain_positive_pairs": 760,
+  "uncertain_negative_pairs": 972,
+  "reject_positive_pairs": 32,
+  "reject_negative_pairs": 35056,
+  "note": "All model, calibration, geometry, and three-way parameters are frozen from sequence 00/02 before this sequence-06 evaluation."
+}

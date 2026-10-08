@@ -1,6 +1,6 @@
 # UniPR-3D / KITTI Cross-Token 3D Loop Closure 项目交接
 
-更新时间：2026-08-15（Asia/Shanghai，已按当前代码和产物二次复核）  
+更新时间：2026-08-18（Asia/Shanghai，已按当前代码和产物再次复核）
 项目根目录：`/data1/jiaming/UniPR-3D-main`
 
 > 本文以当前工作区中的实际代码、模型文件、实验产物和进程状态为准。无法由当前工作区确认的内容均标记为“待确认”。2026-08-15 已在当前目录初始化新的本地 Git 仓库，用于保存当前代码快照；原上游仓库的 `.git` 历史此前缺失，因此当前 Git 历史不能恢复原项目 commit、branch、remote 或本地改动相对上游的准确 diff。原 remote/基准 commit：待确认。
@@ -158,7 +158,7 @@ UniPR-3D-main/
 - 固定 1:3 batch 正负比例的正式 logistic decision head 训练。
 - 02 完整 top-50 特征提取、全量 Platt 校准和三态规则冻结。
 - 05 完整 top-50 的正式不调参独立测试与报告。
-- 06 descriptor 与 top-50 retrieval；06 frozen VGGT 全量测试已部分完成并支持续跑。
+- 06 descriptor、top-50 retrieval、frozen VGGT 全量测试与正式报告。
 - 长任务使用每 100 对一个 CSV chunk，并通过临时文件 rename 原子写入；中断后会跳过已完成 chunk。
 
 ## 5. 每个主要模块的作用
@@ -194,21 +194,21 @@ UniPR-3D-main/
 | KITTI 00 | decision head 训练 | 完成 |
 | KITTI 02 | 全量校准和三态规则 | 完成 |
 | KITTI 05 | 第一独立测试 | 完成 |
-| KITTI 06 | 第二独立测试 | 进行中，当前停止在 345/487 chunks |
+| KITTI 06 | 第二独立测试 | 完成 |
 
-当前最重要状态（2026-08-15 审计时）：
+当前最重要状态（2026-08-18 审计时）：
 
 ```text
 outputs/kitti_06_full_three_way_eval/chunks/
-已完成 345 / 487 chunks
-已完整覆盖 pair_row_index 0..34499
-剩余 142 chunks（约 14,125 pairs）
+已完成 487 / 487 chunks
+已完整覆盖 pair_row_index 0..48624，共 48,625 pairs
+正式 report.json 已生成
 当前没有 evaluate_kitti_frozen_three_way.py 进程在运行
 ```
 
 注意：06 有 997 个进入 historical retrieval 的 query；`487` 是 `ceil(48,625 pairs / 100)` 得到的 chunk 数，不是 query 数。其中 266 个 query 在 GT 中存在历史正例，并且全部在 top-50 中召回了正例。
 
-因此下一位 Agent 首先需要恢复 06 测试，而不是重新训练或重新校准。
+06 已完成，不要重新运行冻结测试，也不要根据 06 结果重新训练或重新校准。
 
 ## 7. 最近修改过的文件以及修改内容
 
@@ -246,12 +246,19 @@ outputs/kitti_06_full_three_way_eval/chunks/
 - `train_kitti_full_decision_head.py`：增加正式 00 训练协议和完整性检查。
 - `calibrate_kitti_three_way_decision.py`：增加读取完整 chunk 目录和完整性检查。
 
+### 2026-08-18
+
+- `summarize_kitti_frozen_three_way.py`：增加显式 sequence ID、动态报告说明、输入元数据、必要字段/行数/索引唯一性与覆盖、标签、状态和概率完整性检查；指标计算口径未改变。
+- 重新汇总 05 到临时文件并确认全部历史指标完全一致。
+- 完成 06 的 487 个 chunks 完整性验证并生成正式 `report.json`。
+- `PROJECT_HANDOFF.md`：更新 06 完成状态、正式指标和 05/06 对比。
+
 原 UniPR 核心文件的时间主要为 2026-06-20，当前 KITTI/cross-token 扩展没有直接修改上述原始核心训练代码。
 
 ## 8. 当前正在解决的问题
 
-1. 完成 KITTI 06 的冻结、不调参第二独立测试，以判断 05 的安全-召回表现能否跨序列泛化。
-2. 06 完成后生成 `outputs/kitti_06_full_three_way_eval/report.json`，并与 05 正式结果对比。
+1. 加强长任务 chunk 续跑的完整性验证；当前提取/评估脚本仍只按文件存在与否决定跳过。
+2. 修复续跑时 tqdm 不反映已完成 chunks 的进度显示。
 3. 当前 VGGT 验证吞吐低：每个 query-candidate pair 都重新联合运行 10 帧 VGGT，同一个 query 对 top-50 被重复计算。
 4. 后续研究需要决定是否实现真正的轻量 3D token bank coarse retrieval；当前仍使用 17152 维 UniPR 全局 descriptor 做 coarse retrieval。
 
@@ -263,7 +270,6 @@ outputs/kitti_06_full_three_way_eval/chunks/
 - **前台长任务随终端/服务器断连停止**：已经多次发生。脚本支持 chunk 续跑，但不会自动守护或自动重启。建议使用 `tmux`/`screen`/作业调度器。
 - **续跑进度条显示误导**：脚本跳过已存在 chunk 时没有更新 tqdm 计数，外层可能显示 `0/487`，但看到 `Chunk 345` 即表示在正确续跑。
 - **descriptor 提取不支持 chunk/续跑**：`extract_kitti_descriptors.py` 完成全部样本后才一次性 `torch.save`；中断会整段重跑。
-- **`summarize_kitti_frozen_three_way.py` 的 note 硬编码 sequence-05**：用于 06 汇总时 JSON note 仍会写 “before this sequence-05 evaluation”。指标不受影响，但文案错误。
 - **全量测试非常慢**：当前实现逐 pair 重跑 VGGT，05 131,625 pairs 约两天；06 48,625 pairs 约十几小时到一天，实际取决于 GPU 和中断。
 - **原训练/评估入口有硬编码作者路径**：例如 `/nas0/dataset/...`、`/home/vggt-pr/...` 和不存在的 checkpoint 路径。原 `main_*`/`eval_lora.py` 不能直接在当前机器复现实验，需显式改配置；本次任务要求未修改原 UniPR 代码。
 - **没有 requirements/environment lock 文件**：环境可通过当前 conda `py311` 的包版本复现，但项目本身未锁版本。
@@ -425,7 +431,7 @@ accepted by label:
 
 产物：`outputs/kitti_05_full_three_way_eval/report.json`。
 
-结论边界：05 上未观察到明确 negative 被 accept，安全性强；端到端安全 accept query recall 为约 80.13%，模型较保守。是否跨序列泛化必须等 06 完成后判断。
+结论边界：05 上未观察到明确 negative 被 accept，安全性强；端到端安全 accept query recall 为约 80.13%，模型较保守。
 
 指标定义以 `summarize_kitti_frozen_three_way.py` 为准：
 
@@ -437,11 +443,33 @@ accepted by label:
 
 ### 10.6 正式 06 独立测试
 
-- descriptor 和 top-50 已完成。
-- 目标总数：48,625 pairs，487 chunks。
+- descriptor、top-50 和 frozen 三态测试均已完成。
+- 完整 `487/487` chunks，48,625 pairs；`pair_row_index` 0..48624 唯一且连续。
 - retrieval query 数：997；historical-positive query 数：266；retrieved-positive query 数：266。
-- 当前完成：345 chunks / 34,500 pairs。
-- 尚无最终 report，不能给出泛化结论。
+
+```text
+Descriptor Recall@50                  1.0000000
+accept pair precision                 1.0000000
+accept pair recall | top-50           0.6987448
+accept query recall | retrieved       0.9511278
+accept query recall end-to-end        0.9511278
+reranked Recall@1 end-to-end          0.9812030
+false positives/query                 0.0
+
+states:
+  accept       1,980
+  uncertain    6,090
+  reject      40,555
+
+accepted by label:
+  positive  1,837
+  negative      0
+  ignore      143
+```
+
+产物：`outputs/kitti_06_full_three_way_eval/report.json`。
+
+05/06 对比：两个独立测试序列均未观察到明确 negative 被 accept，`accept_pair_precision=1.0`、`false_positives_per_query=0.0`。06 的 descriptor Recall@50、accept pair recall、端到端 accept query recall 和 reranked Recall@1 均高于 05；这支持冻结规则在这两个测试序列上的安全性和跨序列泛化，但不能外推到未测试数据。ignore accept 分别为 05 的 221 对和 06 的 143 对，仍需单独报告。
 
 ## 11. 数据集、模型和权重
 
@@ -652,7 +680,7 @@ CUDA_VISIBLE_DEVICES=2 /data1/jiaming/.conda/envs/py311/bin/python \
 
 ### 13.8 冻结测试（05/06）
 
-06 当前续跑命令：
+06 已完成；以下命令仅作为历史复现记录，不应在现有输出目录上重复运行：
 
 ```bash
 CUDA_VISIBLE_DEVICES=2 /data1/jiaming/.conda/envs/py311/bin/python \
@@ -688,31 +716,23 @@ find outputs/kitti_06_full_three_way_eval/chunks \
   summarize_kitti_frozen_three_way.py \
   --pairs outputs/kitti_06_seq5_stride1_unipr_descriptors_top50_pairs.csv \
   --evaluation_dir outputs/kitti_06_full_three_way_eval \
+  --sequence_id 06 \
   --historical_positive_queries 266 \
   --output outputs/kitti_06_full_three_way_eval/report.json
 ```
 
-脚本会验证全部 48,625 个 `pair_row_index` 是否完整。注意生成的 `note` 会错误提到 sequence 05，见已知 Bug；不要修改指标，只需在报告解释中注明。
+脚本会验证必要字段、总行数、全部 48,625 个 `pair_row_index` 的唯一性与完整覆盖、标签、状态和概率范围。报告已生成，无需重复执行。
 
 ## 14. 下一步应该做什么
 
 按优先级：
 
-1. 在 `tmux` 或调度器中用 13.8 的原命令恢复 06，从 `chunk_00345` 继续到 `486`。
-2. 确认 `487` 个 chunks 后运行 13.9 汇总，生成 06 正式报告。
-3. 将 06 与 05 比较，重点看：
-   - descriptor Recall@50；
-   - accept pair precision；
-   - 明确 negative accept 数；
-   - accept query recall end-to-end；
-   - reranked Recall@1；
-   - false positives/query；
-   - positive/negative/ignore 的三态分布。
-4. 不得根据 06 结果回调 00 head、02 Platt 或三态阈值；否则 06 不再是独立测试。
-5. 形成正式实验表：600 对基线、00 全量正式模型、05/06 独立测试。
-6. 若 05/06 都安全但 recall 偏低，下一研究阶段应处理 uncertain，而不是直接用测试集调阈值：可在新的验证序列上研究更多帧、retrieval margin、候选熵、yaw/pose embedding 或后端二次验证。
-7. 若继续优化速度，应优先消除同一 query 对 top-50 重复 VGGT 前向，设计可缓存/复用的 query/candidate token 或只对 top-N/uncertain 候选运行重型 VGGT。
-8. 找回原上游 Git remote/基准 commit，并补充依赖锁文件，再开始较大代码重构。当前新仓库仅代表本机代码快照。
+1. 不得根据 05/06 结果回调 00 head、02 Platt 或三态阈值；两者必须保持独立测试。
+2. 加强 `extract_kitti_cross_token_3d_full.py` 和 `evaluate_kitti_frozen_three_way.py` 的已有 chunk 内容验证，并修复续跑进度显示。
+3. 形成正式实验表：600 对基线、00 全量正式模型、02 校准、05/06 独立测试。
+4. 若继续研究 recall，应在新的验证序列上处理 uncertain，例如更多帧、retrieval margin、候选熵、yaw/pose embedding 或后端二次验证；不能使用 05/06 调阈值。
+5. 若继续优化速度，应优先消除同一 query 对 top-50 重复 VGGT 前向，设计可缓存/复用的 query/candidate token 或只对 top-N/uncertain 候选运行重型 VGGT。
+6. 找回原上游 Git remote/基准 commit，并补充依赖锁文件，再开始较大代码重构。当前新仓库仅代表本机代码快照。
 
 ## 15. 需要特别注意的地方
 
@@ -730,4 +750,4 @@ find outputs/kitti_06_full_three_way_eval/chunks \
 - `CUDA_VISIBLE_DEVICES=2` 后，物理 GPU 2 在进程内部是 `cuda:0`；命令参数仍使用 `--device cuda`，不要改成 `cuda:2`。
 - 当前脚本前台运行会随终端或服务器断连终止，必须使用 `tmux`/`screen`/scheduler 才能可靠完成长任务。
 - `outputs/`、`model/multi_model.ckpt` 和 `model/VGGT-model/model.pt` 已加入 `.gitignore`，不会进入普通 Git。它们需要 Git LFS、artifact storage 或独立下载说明。
-- 本文创建时未修改任何现有项目代码，仅新增 `PROJECT_HANDOFF.md`。
+- 2026-08-18 已更新本文以反映 06 全量测试和正式汇总结果。

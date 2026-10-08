@@ -1,0 +1,6 @@
+stage,role,accept_pair_precision,accepted_negative,accepted_ignore,accept_pair_recall_conditional_top50,accept_query_recall_end_to_end,reranked_recall_at_1_end_to_end,descriptor_recall_at_50,false_positives_per_query,roc_auc,average_precision,notes
+early_600_pair_model_on_05,feasibility_baseline,1.0,0,1228,0.6990344325013663,0.8392857142857143,0.890625,0.953125,0.0,,,Not the formal model
+formal_train_00,training_pool_fit,,,,,,,,,0.9991186709630988,0.9979808236769145,Not a generalization result
+formal_calibration_02,calibration_set,0.9902912621359223,17,,0.6969453376205788,,,,,0.9982079481060676,0.9552780061610961,Ignore states are not comparable because the calibration mask forces ignore to uncertain
+formal_test_05,first_independent_test,1.0,0,221,0.5135725997449444,0.8013392857142857,0.8928571428571429,0.953125,0.0,,,Frozen without sequence-05 tuning
+formal_test_06,second_independent_test,1.0,0,143,0.698744769874477,0.9511278195488722,0.981203007518797,1.0,0.0,,,Frozen without sequence-06 tuning

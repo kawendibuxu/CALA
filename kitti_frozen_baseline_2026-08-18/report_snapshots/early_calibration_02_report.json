@@ -1,0 +1,51 @@
+{
+  "head_checkpoint": "/data1/jiaming/UniPR-3D-main/outputs/kitti_cross_token_3d_decision_head_00_to_02/decision_head.pt",
+  "calibration_csv": "/data1/jiaming/UniPR-3D-main/outputs/kitti_02_top50_cross_token_3d_rank_stratified_calibration.csv",
+  "full_pairs": "/data1/jiaming/UniPR-3D-main/outputs/kitti_02_seq5_stride1_unipr_descriptors_top50_pairs.csv",
+  "features": [
+    "descriptor_similarity",
+    "weighted_3d_inlier_ratio",
+    "median_3d_residual",
+    "p90_3d_residual",
+    "mean_track_confidence",
+    "mean_visibility",
+    "temporal_consistency"
+  ],
+  "calibration": {
+    "type": "weighted_platt",
+    "coef": 0.7068503272461781,
+    "intercept": -7.146654012578436
+  },
+  "rules": {
+    "accept_probability": 0.6702510028791208,
+    "reject_probability": 0.05,
+    "track_confidence_accept_min": 0.13162868618965148,
+    "visibility_accept_min": 0.17226495504613937,
+    "median_3d_residual_accept_max": 0.3402427090704434,
+    "track_confidence_reject_max": 0.3532028559095298,
+    "visibility_reject_max": 0.15168186772012693
+  },
+  "weighted_metrics": {
+    "roc_auc": 0.9978822584849147,
+    "average_precision": 0.9592783490463638,
+    "brier": 0.0020756700288819445,
+    "accept": {
+      "tp": 167,
+      "fp": 0,
+      "fn": 125,
+      "precision": 1.0,
+      "recall": 0.571917808219178
+    }
+  },
+  "state_counts_sample": {
+    "accept": 167,
+    "uncertain": 337,
+    "reject": 1038
+  },
+  "state_weighted_population": {
+    "accept": 2061.125,
+    "uncertain": 13167.98,
+    "reject": 211395.895
+  },
+  "note": "Rules are selected only on sequence 02 and must remain frozen for sequence 05."
+}
